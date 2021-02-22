@@ -1,4 +1,5 @@
 const express = require('express');
+const { sync } = require('../db/dml');
 const { getLearningInLang } = require('../db/query');
 const { trimDate, getDateDiff } = require('./tz');
 const { getNow } = require('./util');
@@ -25,6 +26,12 @@ router.get('/:lang/:tzOffset', async (req, res) => {
   }
 
   res.json(filtered);
+});
+
+router.put('/', async (req, res) => {
+  const words = req.body;
+  await sync(words);
+  res.sendStatus(200);
 });
 
 module.exports = router;

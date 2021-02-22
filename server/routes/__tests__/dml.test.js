@@ -50,6 +50,11 @@ const sync = async (body) => {
   return response;
 };
 
+const daily = async (body) => {
+  const response = await request(app).put('/api/daily').send(body);
+  expect(response.statusCode).toBe(200);
+};
+
 test('create one', async () => {
   const [level, word, yomigana, meaning] = ['E2001', 'w', 'y', 'm'];
   await post({ level, word, yomigana, meaning });
@@ -179,4 +184,45 @@ test('sync deleted', async () => {
   const [level, index] = ['E2001', 1];
   const { body } = await sync([{ level, index, streak: 1, lastCorrect }]);
   expect(body.length).toBe(0);
+});
+
+test('daily one', async () => {
+  const [level, index, streak] = ['E2001', 1, 1];
+  const [word, yomigana, meaning] = ['w', 'y', 'm'];
+  await post({ level, word, yomigana, meaning });
+  await daily([{ level, index, streak, lastCorrect }]);
+  const body = await get(`/api/select/${level}`);
+  expect(body.length).toBe(1);
+  expect(body).toStrictEqual([
+    {
+      level,
+      meaning,
+      word,
+      yomigana,
+      index: 1,
+      lastCorrect,
+      streak,
+    },
+  ]);
+});
+
+test('daily again', async () => {
+  const [level, index] = ['E2001', 1];
+  const [word, yomigana, meaning] = ['w', 'y', 'm'];
+  await post({ level, word, yomigana, meaning });
+  await daily([{ level, index, streak: 1, lastCorrect }]);
+  await daily([{ level, index, streak: 2, lastCorrect }]);
+  const body = await get(`/api/select/${level}`);
+  expect(body.length).toBe(1);
+  expect(body).toStrictEqual([
+    {
+      level,
+      meaning,
+      word,
+      yomigana,
+      index: 1,
+      lastCorrect,
+      streak: 2,
+    },
+  ]);
 });
