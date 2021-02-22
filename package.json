@@ -36,7 +36,7 @@
     "lint": "eslint --fix \"src/**/*.{js,jsx}\" \"server/**/*.js\"",
     "jest": "jest -w 1 --watch --only-changed --config server/jest-config.json"
   },
-  "proxy": "http://localhost:3020",
+  "proxy": "http://localhost:3090",
   "eslintConfig": {
     "extends": [
       "react-app",

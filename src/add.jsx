@@ -21,11 +21,7 @@ const useStyles = makeStyles({
   },
 });
 
-const languages = [
-  { key: 'E', emoji: '🇬🇧' },
-  { key: 'F', emoji: '🇫🇷' },
-  { key: 'J', emoji: '🇯🇵' },
-];
+const languages = [{ key: 'S', emoji: '🇪🇸' }];
 
 export default () => {
   const history = useHistory();
