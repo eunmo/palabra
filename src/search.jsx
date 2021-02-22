@@ -81,10 +81,10 @@ export default ({ initialValue, onChange = () => {} }) => {
         </IconButton>
         <InputBase
           className={classes.input}
-          placeholder="Search Tango"
+          placeholder="Search Palabra"
           value={keyword}
           onChange={({ target }) => setKeyword(target.value)}
-          inputProps={{ 'aria-label': 'search tango' }}
+          inputProps={{ 'aria-label': 'search palabra' }}
         />
         <IconButton
           className={classes.iconButton}

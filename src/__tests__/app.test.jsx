@@ -4,6 +4,6 @@ import App from '../app';
 
 test('renders learn react link', () => {
   const { getByText } = render(<App />);
-  const element = getByText(/Tango/i);
+  const element = getByText(/Palabra!/i);
   expect(element).toBeInTheDocument();
 });

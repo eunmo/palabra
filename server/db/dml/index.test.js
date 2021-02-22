@@ -3,7 +3,7 @@ const { add, edit, remove, sync } = require('.');
 
 beforeAll(async () => {
   await dml('DROP TABLE IF EXISTS words;');
-  await dml('CREATE TABLE words LIKE tango.words;');
+  await dml('CREATE TABLE words LIKE palabra.words;');
 });
 
 afterAll(async () => {

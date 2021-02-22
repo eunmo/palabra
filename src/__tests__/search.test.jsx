@@ -34,7 +34,7 @@ test('renders search box', () => {
   const { getByRole, getByPlaceholderText } = renderSearch(900);
   expect(getByRole('button', { name: 'search' })).toBeInTheDocument();
   expect(getByRole('button', { name: 'clear search' })).toBeInTheDocument();
-  expect(getByPlaceholderText('Search Tango')).toBeInTheDocument();
+  expect(getByPlaceholderText('Search Palabra')).toBeInTheDocument();
 });
 
 test('prevents empty query', async () => {
@@ -50,7 +50,7 @@ test('prevents empty query', async () => {
 
 test('renders search results', async () => {
   const { getAllByRole, getByRole, getByPlaceholderText } = renderSearch(900);
-  const textField = getByPlaceholderText('Search Tango');
+  const textField = getByPlaceholderText('Search Palabra');
   const submit = getByRole('button', { name: 'search' });
 
   fireEvent.change(textField, { target: { value: 'happy' } });
@@ -67,7 +67,7 @@ test('renders search results', async () => {
 
 test('renders empty query', async () => {
   const { getByRole, getByPlaceholderText, queryByRole } = renderSearch(900);
-  const textField = getByPlaceholderText('Search Tango');
+  const textField = getByPlaceholderText('Search Palabra');
   const submit = getByRole('button', { name: 'search' });
 
   fireEvent.change(textField, { target: { value: 'xxx' } });

@@ -37,7 +37,7 @@ test.each([
   renderAdd();
   const { getByLabelText, getByPlaceholderText } = screen;
 
-  const textField = getByPlaceholderText('Search Tango');
+  const textField = getByPlaceholderText('Search Palabra');
   fireEvent.change(textField, { target: { value: input } });
 
   fireEvent.click(getByLabelText('from search'));
@@ -60,7 +60,7 @@ test.each([
     fireEvent.click(getByLabelText('to search'));
   });
 
-  const textField = getByPlaceholderText('Search Tango');
+  const textField = getByPlaceholderText('Search Palabra');
   expect(textField.value).toBe(input);
   expect(calledUrls.length).toBe(1);
   expect(calledUrls[0]).toBe(`/api/search/${input}`);
@@ -76,7 +76,7 @@ test.each([
   renderAdd();
   const { getByLabelText, getByPlaceholderText } = screen;
 
-  const textField = getByPlaceholderText('Search Tango');
+  const textField = getByPlaceholderText('Search Palabra');
   fireEvent.change(textField, { target: { value: input } });
 
   fireEvent.click(getByLabelText('from search'));
@@ -111,7 +111,7 @@ test.each([
     fireEvent.click(getByLabelText('to search'));
   });
 
-  const textField = getByPlaceholderText('Search Tango');
+  const textField = getByPlaceholderText('Search Palabra');
   expect(textField.value).toBe(input);
   expect(calledUrls.length).toBe(1);
   expect(calledUrls[0]).toBe(`/api/search/${input}`);
