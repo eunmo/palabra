@@ -15,6 +15,7 @@ import Search from './searchRoute';
 import Edit from './edit';
 import Add from './add';
 import Summary from './summary';
+import Daily from './daily';
 
 export default () => {
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
@@ -50,6 +51,9 @@ export default () => {
             </Route>
             <Route path="/summary">
               <Summary />
+            </Route>
+            <Route path="/daily/:lang">
+              <Daily />
             </Route>
             <Redirect from="/" to="/search" exact />
           </Switch>

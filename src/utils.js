@@ -61,4 +61,25 @@ const sortWordsByPattern = (patterns, words) => {
 
 const getYYMM = () => new Date().toISOString().slice(2, 7).replace(/-/, '');
 
-export { get, post, put, fetchDelete, sortWordsByPattern, getYYMM };
+const shuffleIndices = (count) => {
+  const array = [...Array(count).keys()];
+
+  for (let i = array.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(Math.random() * (i + 1));
+    const temp = array[i];
+    array[i] = array[j];
+    array[j] = temp;
+  }
+
+  return array;
+};
+
+export {
+  get,
+  post,
+  put,
+  fetchDelete,
+  sortWordsByPattern,
+  getYYMM,
+  shuffleIndices,
+};

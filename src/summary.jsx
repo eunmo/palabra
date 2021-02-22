@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
 import ButtonBase from '@material-ui/core/ButtonBase';
@@ -13,6 +14,7 @@ import {
   EventAvailable,
   EventBusy,
   Refresh,
+  Remove,
   ShowChart,
 } from '@material-ui/icons';
 
@@ -50,6 +52,11 @@ const useStyles = makeStyles({
     bottom: '16px',
     right: '16px',
   },
+  upperFabs: {
+    position: 'absolute',
+    bottom: '88px',
+    right: '16px',
+  },
   fab: {
     marginLeft: '16px',
   },
@@ -60,7 +67,7 @@ const selected = {
 };
 
 export default () => {
-  const [langs, setLangs] = useState([]);
+  const [langs, setLangs] = useState(undefined);
   const [levels, setLevels] = useState([]);
   const [selectedLang, setSelectedLang] = useState('all');
   const [filterToday, setFilterToday] = useState(false);
@@ -86,7 +93,7 @@ export default () => {
     setSelectedLang(lang === selectedLang ? 'all' : lang);
   };
 
-  if (langs.length === 0) {
+  if (langs === undefined) {
     return <LinearProgress />;
   }
 
@@ -134,7 +141,7 @@ export default () => {
       if (filterToday && day !== 0) {
         return;
       }
-      const index = streak === 0 ? 9 : 10 - streak;
+      const index = streak <= 0 ? 9 : 10 - streak;
       month.streaks[index].sum += count;
       sums[index].sum += count;
       days[day].streaks[index].sum += count;
@@ -237,6 +244,17 @@ export default () => {
             </Grid>
           ))}
         </Grid>
+        <div className={classes.upperFabs}>
+          <Fab
+            color="secondary"
+            aria-label="daily"
+            className={classes.fab}
+            component={Link}
+            to="/daily/S"
+          >
+            <Remove />
+          </Fab>
+        </div>
         <div className={classes.fabs}>
           <Fab
             color={filterToday ? 'secondary' : 'default'}

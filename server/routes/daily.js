@@ -12,20 +12,16 @@ router.get('/:lang/:tzOffset', async (req, res) => {
   const learning = await getLearningInLang(lang);
 
   const refDate = trimDate(getNow(), timezone);
-  const filtered = learning.filter(({ streak, lastCorrect }) => {
+  const fresh = learning.filter(({ lastCorrect }) => lastCorrect === null);
+  const review = learning.filter(({ streak, lastCorrect }) => {
     if (lastCorrect === null) {
-      return true;
+      return false;
     }
     const diff = getDateDiff(lastCorrect, timezone, refDate);
     return streak <= diff;
   });
 
-  if (filtered.length === 0) {
-    res.json([]);
-    return;
-  }
-
-  res.json(filtered);
+  res.json({ fresh, review });
 });
 
 router.put('/', async (req, res) => {

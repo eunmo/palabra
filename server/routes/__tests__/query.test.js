@@ -166,12 +166,13 @@ test.each([
 });
 
 test.each([
-  ['E', -540, 5, '2020-07-13T09:00:00.000+09:00'],
-  ['E', -540, 3, '2020-07-12T09:00:00.000+09:00'],
-  ['E', -540, 6, '2020-07-14T09:00:00.000+09:00'],
-  ['S', -540, 0, '2020-07-13T09:00:00.000+09:00'],
-])('get daily %s %d', async (lang, tz, expected, today) => {
+  ['E', -540, 3, 2, '2020-07-13T09:00:00.000+09:00'],
+  ['E', -540, 3, 0, '2020-07-12T09:00:00.000+09:00'],
+  ['E', -540, 3, 3, '2020-07-14T09:00:00.000+09:00'],
+  ['S', -540, 0, 0, '2020-07-13T09:00:00.000+09:00'],
+])('get daily %s %d', async (lang, tz, fresh, review, today) => {
   setMockDate(today);
   const words = await get(`/api/daily/${lang}/${tz}`);
-  expect(words.length).toBe(expected);
+  expect(words.fresh.length).toBe(fresh);
+  expect(words.review.length).toBe(review);
 });
