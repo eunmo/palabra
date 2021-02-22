@@ -12,22 +12,25 @@ export default () => {
   const [reviewType, setReviewType] = useState(undefined);
   const { lang } = useParams();
 
-  function fetch() {
+  const fetch = useCallback(() => {
     const tzOffset = new Date().getTimezoneOffset();
     get(`/api/daily/${lang}/${tzOffset}`, setWords);
-  }
+  }, [lang]);
 
   useEffect(() => {
     fetch();
-  }, [lang]);
+  }, [fetch]);
 
-  const save = useCallback((results) => {
-    setWords(undefined);
-    setReviewType(undefined);
-    put('/api/daily', results, () => {
-      fetch();
-    });
-  });
+  const save = useCallback(
+    (results) => {
+      setWords(undefined);
+      setReviewType(undefined);
+      put('/api/daily', results, () => {
+        fetch();
+      });
+    },
+    [fetch]
+  );
 
   if (words === undefined) {
     return <LinearProgress />;

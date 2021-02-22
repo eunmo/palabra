@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
@@ -27,19 +27,24 @@ export default ({ words, type, save }) => {
   const [results, setResults] = useState([]);
   const [selected, setSelected] = useState(undefined);
   const classes = useStyles();
-  const [iteration, setIteration] = useState(0);
   const reduced = useMemo(() => {
     return shuffleIndices(words.length).slice(0, 7);
   }, [words]);
-  const targets = useMemo(() => {
-    return shuffleIndices(reduced.length).map((i) => words[reduced[i]]);
-  }, [words, iteration, reduced]);
+  const [targets, setTargets] = useState([]);
+
+  const shuffle = useCallback(() => {
+    setTargets(shuffleIndices(reduced.length).map((i) => words[reduced[i]]));
+  }, [words, reduced]);
+
+  useEffect(() => {
+    shuffle();
+  }, [shuffle]);
 
   const setResult = (word, result) => {
     if (word.done) {
       if (type === 'fresh' && !word.complete) {
         setSelected(undefined);
-        setIteration(iteration + 1);
+        shuffle();
         setResults([]);
       } else {
         save(results);
