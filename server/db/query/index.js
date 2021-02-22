@@ -8,6 +8,16 @@ const getLearning = () => {
   return query('SELECT * FROM words WHERE streak < 11 ORDER BY level, `index`');
 };
 
+const getLearningInLang = (lang) => {
+  return query(
+    `SELECT *
+       FROM words
+      WHERE streak < 11
+        AND SUBSTR(level, 1, 1) = ?`,
+    lang
+  );
+};
+
 const getLearningInLevel = (level) => {
   return query(
     `SELECT *
@@ -62,6 +72,7 @@ const getWord = async (level, index) => {
 module.exports = {
   getNew,
   getLearning,
+  getLearningInLang,
   getLearningInLevel,
   getLangSummary,
   getSummary,

@@ -6,7 +6,7 @@ const lastCorrect2 = '2020-07-12T22:45:12.000+09:00';
 
 const prepare = async () => {
   await dml('DROP TABLE IF EXISTS words;');
-  await dml('CREATE TABLE words LIKE tango.words;');
+  await dml('CREATE TABLE words LIKE palabra.words;');
   await add(`N0`, 'j', 'k', 'l');
   for (let i = 1; i < 4; i += 1) {
     for (let j = 0; j < 5; j += 1) {

@@ -3,9 +3,14 @@ const { prepare, cleanup } = require('../../db/mock');
 const app = require('../../app');
 
 jest.mock('../util');
+const { setMockDate } = require('../util');
 
 beforeAll(async () => {
   await prepare();
+});
+
+beforeEach(() => {
+  setMockDate();
 });
 
 afterAll(async () => {
@@ -158,4 +163,15 @@ test.each([
   const body = await get(encodeURI(`/api/search/${pattern}`));
   expect(body.patterns.length).toBe(patternCount);
   expect(body.words.length).toBe(wordCount);
+});
+
+test.each([
+  ['E', -540, 5, '2020-07-13T09:00:00.000+09:00'],
+  ['E', -540, 3, '2020-07-12T09:00:00.000+09:00'],
+  ['E', -540, 6, '2020-07-14T09:00:00.000+09:00'],
+  ['S', -540, 0, '2020-07-13T09:00:00.000+09:00'],
+])('get daily %s %d', async (lang, tz, expected, today) => {
+  setMockDate(today);
+  const words = await get(`/api/daily/${lang}/${tz}`);
+  expect(words.length).toBe(expected);
 });

@@ -1,1 +1,1 @@
-process.env.NODE_CONFIG = '{"dbConfig":{"database":"tangotest"}}';
+process.env.NODE_CONFIG = '{"dbConfig":{"database":"palabratest"}}';

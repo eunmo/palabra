@@ -2,6 +2,7 @@ const { prepare, cleanup } = require('../mock');
 const {
   getNew,
   getLearning,
+  getLearningInLang,
   getLearningInLevel,
   getLangSummary,
   getSummary,
@@ -25,6 +26,11 @@ test('get new words', async () => {
 test('get words to learn', async () => {
   const rows = await getLearning();
   expect(rows.length).toBe(42);
+});
+
+test('get words to learn in lang', async () => {
+  const rows = await getLearningInLang('E');
+  expect(rows.length).toBe(14);
 });
 
 test('get words to learn in level', async () => {
