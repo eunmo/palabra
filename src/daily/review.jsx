@@ -88,6 +88,11 @@ export default ({ words, type, save }) => {
     word = targets[index];
   }
 
+  let wordStyle;
+  if (word.word.length >= 10) {
+    wordStyle = { fontSize: `${150 / word.word.length}vw` };
+  }
+
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
@@ -95,7 +100,7 @@ export default ({ words, type, save }) => {
           <Typography align="center" variant="h5" className={classes.yomigana}>
             {selected !== undefined && word.yomigana}
           </Typography>
-          <Typography align="center" variant="h2">
+          <Typography align="center" variant="h2" style={wordStyle}>
             {word.word}
           </Typography>
           <Typography align="center" variant="h4" className={classes.meaning}>
