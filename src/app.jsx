@@ -52,7 +52,7 @@ export default () => {
             <Route path="/summary">
               <Summary />
             </Route>
-            <Route path="/daily/:lang">
+            <Route path="/daily">
               <Daily />
             </Route>
             <Redirect from="/" to="/search" exact />

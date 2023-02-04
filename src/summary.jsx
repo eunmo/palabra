@@ -246,11 +246,11 @@ export default () => {
         </Grid>
         <div className={classes.upperFabs}>
           <Fab
-            color="secondary"
+            color="default"
             aria-label="daily"
             className={classes.fab}
             component={Link}
-            to="/daily/S"
+            to="/daily"
           >
             <Remove />
           </Fab>

@@ -74,6 +74,11 @@ const shuffleIndices = (count) => {
   return array;
 };
 
+const languages = [
+  { key: 'E', emoji: '🇬🇧', name: 'English' },
+  { key: 'S', emoji: '🇪🇸', name: 'Spanish' },
+];
+
 export {
   get,
   post,
@@ -82,4 +87,5 @@ export {
   sortWordsByPattern,
   getYYMM,
   shuffleIndices,
+  languages,
 };

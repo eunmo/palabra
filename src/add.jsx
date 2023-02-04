@@ -7,7 +7,7 @@ import TextField from '@material-ui/core/TextField';
 import { ArrowDownward, ArrowUpward, Clear } from '@material-ui/icons';
 
 import Search from './search';
-import { post, getYYMM } from './utils';
+import { post, getYYMM, languages } from './utils';
 
 const useStyles = makeStyles({
   buttons: {
@@ -20,8 +20,6 @@ const useStyles = makeStyles({
     margin: '24px 8px 0 0',
   },
 });
-
-const languages = [{ key: 'S', emoji: '🇪🇸' }];
 
 export default () => {
   const history = useHistory();
